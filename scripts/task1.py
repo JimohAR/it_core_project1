@@ -1,4 +1,5 @@
 from tabulate import tabulate
+import pandas as pd
 class task1:
     def __init__(self, data):
         self.data = data 
@@ -18,8 +19,17 @@ class task1:
         print(">> top 3 handsets manufacturers patronized by customers")
         print(tabulate(top3_manufacturers.to_frame(), tablefmt= "grid"))
 
+        handsets_by_top3_manufacturers = handset_data.set_index(keys= ["Handset Manufacturer"]).loc[top3_manufacturers.keys()]
+        top5_of_top3_manufacturers_dict = dict()
+        for i in top3_manufacturers.keys():
+            top5_of_top3_manufacturers_dict[i] = handsets_by_top3_manufacturers.loc[i, "Handset Type"].value_counts().head(5)
         
+        top5_of_top3_manufacturers = pd.DataFrame.from_dict(top5_of_top3_manufacturers_dict, orient= "index").stack()
+        top5_of_top3_manufacturers.name = "count"
+        top5_of_top3_manufacturers = top5_of_top3_manufacturers.to_frame()
 
+        print(">> top 5 handsets produced by the top 3 handset manufacturers patronized by customers")
+        print(tabulate(top5_of_top3_manufacturers, tablefmt= "grid"))
 
 
 
