@@ -11,12 +11,12 @@ class task1:
         self.data.columns = new_data_col
 
         handset_data = self.data[['Handset Manufacturer', 'Handset Type',]]
-        top10_handet = handset_data["Handset Type"][handset_data["Handset Type"] != "undefined"].value_counts()
+        top10_handet = handset_data["Handset Type"][handset_data["Handset Type"] != "undefined"].value_counts()[:10]
         print(">> top 10 handsets used by customers")
         print(tabulate(top10_handet.to_frame(), tablefmt= "grid"))
 
         top3_manufacturers = handset_data["Handset Manufacturer"][handset_data["Handset Manufacturer"] != "undefined"].value_counts().head(3)
-        print(">> top 3 handsets manufacturers patronized by customers")
+        print("\n>> top 3 handsets manufacturers patronized by customers")
         print(tabulate(top3_manufacturers.to_frame(), tablefmt= "grid"))
 
         handsets_by_top3_manufacturers = handset_data.set_index(keys= ["Handset Manufacturer"]).loc[top3_manufacturers.keys()]
@@ -28,7 +28,7 @@ class task1:
         top5_of_top3_manufacturers.name = "count"
         top5_of_top3_manufacturers = top5_of_top3_manufacturers.to_frame()
 
-        print(">> top 5 handsets produced by the top 3 handset manufacturers patronized by customers")
+        print("\n>> top 5 handsets produced by the top 3 handset manufacturers patronized by customers")
         print(tabulate(top5_of_top3_manufacturers, tablefmt= "grid"))
 
 
