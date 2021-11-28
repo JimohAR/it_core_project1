@@ -9,8 +9,11 @@ import os
 path = os.getcwd() + "/data/"
 data = pd.read_csv(path + "telco.csv").iloc[:-1]
 
-from task1 import task1
+from task1 import Task1
 
 ####### USER OVERVIEW ANALYSIS#######
-overview = task1(data)
+overview = Task1(data)
 overview.user_overview_analysis()
+
+####### DATA USAGE BY CUSTOMERS ######
+overview.get_aggregate_data()
