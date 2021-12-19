@@ -1,0 +1,5 @@
+incase you encounter an erno 13 error when mysql-connector tries to read from file. 
+It is mostlikely a permission error, mysql server doesn't have permission to read from the directory. 
+Go to the file and give the current os user read permission
+
+read more: https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/starting-server-troubleshooting.html#:~:text=If%20you%20get%20Errcode%2013,the%20right%20to%20use%20them.

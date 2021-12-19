@@ -1,0 +1,4 @@
+outs:
+- md5: 406b66ba3ef373c96582f761f458ec64
+  size: 3939010
+  path: scores.csv
