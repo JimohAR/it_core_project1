@@ -17,4 +17,3 @@ def set_path(folder="data"):
 def format_column_names(cols: list):
     new_cols = [i.strip().lower().replace(" ", "_") for i in cols]
     return new_cols
-
