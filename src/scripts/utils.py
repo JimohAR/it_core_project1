@@ -8,7 +8,10 @@ def set_path(folder="data"):
     else:
         # script running at script location
         path = (os.path.abspath(os.getcwd() + f"/../../" + f"{folder}") + "/").replace("\\", "/")
-    print(f"\n>> set to: \n...\tit_core_project1{path.split('it_core_project1')[1]}")
+    try:    
+        print(f"\n>> set to: \n...\tit_core_project1{path.split('it_core_project1')[1]}")
+    except:
+        print(f"\n>> set to: \n...\t{path}")
     return path
 
 def format_column_names(cols: list):
