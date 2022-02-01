@@ -16,12 +16,16 @@ import numpy as np
 from sklearn.linear_model import RidgeCV
 from sklearn.metrics import accuracy_score, r2_score
 
+import sys
 import os
-# from collections import defaultdict
+
 import pickle
 
-path = (os.path.abspath(os.getcwd() + "/../../" + "data") + "/").replace("\\", "/")
+base_path = os.getcwd().split("it_core_project1")[0] + "it_core_project1"
+sys.path.append(base_path)
+from src.scripts.utils import set_path
 
+path = set_path("data")
 
 @st.cache
 def load_data(nrows=500):
