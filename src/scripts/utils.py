@@ -1,6 +1,8 @@
 import os
 import gdown 
+import streamlit as st
 
+@st.cache
 def get_gdrive_file():
     id = "1LorBoIoTw1dKgPiUo9-1AfYZmU9UUBFQ"
     file_path = set_path() + "user_engagement_data.csv"
