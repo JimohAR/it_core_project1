@@ -10,4 +10,4 @@ enableCORS=false\n\
 port = $PORT\n\`
 " > ~/.streamlit/config.toml
 
-dvc pull
+pip freeze

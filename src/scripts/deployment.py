@@ -24,8 +24,10 @@ import pickle
 base_path = os.getcwd().split("it_core_project1")[0] + "it_core_project1"
 sys.path.append(base_path)
 from src.scripts.utils import set_path
+from src.scripts.utils import get_gdrive_file
 
 path = set_path("data")
+get_gdrive_file()
 
 @st.cache
 def load_data(nrows=500):
