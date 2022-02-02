@@ -21,7 +21,6 @@ import os
 
 import pickle
 
-st.write(os.listdir())
 base_path = os.getcwd().split("it_core_project1")[0] + "it_core_project1"
 sys.path.append(base_path)
 from src.scripts.utils import set_path

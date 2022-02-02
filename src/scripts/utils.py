@@ -10,7 +10,8 @@ def set_path(folder="data"):
         path = (os.path.abspath(os.getcwd() + f"/../../" + f"{folder}") + "/").replace("\\", "/")
     try:    
         print(f"\n>> set to: \n...\tit_core_project1{path.split('it_core_project1')[1]}")
-    except:
+    except IndexError:
+        # on remote (heroku/github)
         print(f"\n>> set to: \n...\t{path}")
     return path
 
