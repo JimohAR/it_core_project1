@@ -1,13 +1,10 @@
 from tabulate import tabulate
 import pandas as pd
 import numpy as np
-from pprint import pprint
-
 
 class Task1:
     def __init__(self, data):
         self.data = data
-        pass
 
     def user_overview_analysis(self):
         # stripping out the column names for easy parsing

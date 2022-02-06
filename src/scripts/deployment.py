@@ -1,33 +1,31 @@
-# Model deployment tracking- deploy the model 
-# and monitor your model. Here you can use Docker 
-# or other MlOps tools which can help you 
-# to track your model’s change.  
-# Your model tracking report includes code version, 
-# start and end time, source, parameters, 
-# metrics (loss convergence), 
-# and artifacts or any output file regarding each specific run. 
+# Model deployment tracking- deploy the model
+# and monitor your model. Here you can use Docker
+# or other MlOps tools which can help you
+# to track your model’s change.
+# Your model tracking report includes code version,
+# start and end time, source, parameters,
+# metrics (loss convergence),
+# and artifacts or any output file regarding each specific run.
 # (CSV file, screenshot)
 
-import streamlit as st
+import os
+import pickle
+import sys
 
-import pandas as pd
 import numpy as np
-
+import pandas as pd
+import streamlit as st
 from sklearn.linear_model import RidgeCV
 from sklearn.metrics import accuracy_score, r2_score
 
-import sys
-import os
-
-import pickle
-
-base_path = os.getcwd().split("it_core_project1")[0] + "it_core_project1"
-sys.path.append(base_path)
-from src.scripts.utils import set_path
-from src.scripts.utils import get_gdrive_file
+base_path = os.path.abspath(os.getcwd().split("src")[0])
+if base_path not in sys.path:
+    sys.path.append(base_path)
+    
+from src.scripts.utils import get_gdrive_files, set_path
 
 path = set_path("data")
-get_gdrive_file()
+get_gdrive_files()
 
 @st.cache
 def load_data(nrows=500):
@@ -38,9 +36,6 @@ def load_data(nrows=500):
 # make the sidebar
 bar = st.sidebar
 options = bar.radio("Choose Option", ("Sample Data", "Stats", "Get Predictions"), index=0)
-# show_data = bar.checkbox("Sample Data")
-# show_stats = bar.checkbox("Stats")
-# get_predictions = bar.checkbox("Get Predictions")
 
 # title
 align_center = """\
@@ -85,20 +80,20 @@ if options == "Get Predictions":
         # there will be two input methods: manually or through a file
         input_method = st.radio("choose method", ("manual", "upload data"))
         if input_method == "manual":
-            input = {}
+            inputs = {}
             for col in data1.columns:
                 df = data1[col]
                 value = st.number_input(col, df.min(), df.max(), df.mean(), (df.max() - df.min()) / 100.0)
-                input[col] = value
-            new_input = np.array(list(input.values())).reshape(1, -1)
+                inputs[col] = value
+            new_input = np.array(list(inputs.values())).reshape(1, -1)
             if st.button("predict"):
                 st.success(f"#### __RESULT__: {model.predict(new_input)[0]}")
             else:
                 st.empty()
         elif input_method == "upload data":
-            input = st.file_uploader("upload a csv file with the input(s)", ["csv"])
-            if input != None:
-                new_input = pd.read_csv(input, header=None).to_numpy().reshape(1, -1)
+            inputs = st.file_uploader("upload a csv file with the input(s)", ["csv"])
+            if inputs != None:
+                new_input = pd.read_csv(inputs, header=None).to_numpy().reshape(1, -1)
                 if st.button("predict"):
                     st.success(f"#### __RESULT__: {model.predict(new_input)[0]}")
                 else:
@@ -108,9 +103,9 @@ if options == "Get Predictions":
 st.markdown(""" """)
 link = """[<center> <img src= https://raw.githubusercontent.com/JimohAR/it_core_project1/83f661b2beb7ad2be52c8fd47a2d9deab38e865f/data/github.svg alt="view source"/> </center>](https://github.com)"""
 link2 = \
-    f"""<center> 
-        <a href="https://github.com/JimohAR/it_core_project1" target="_blank" rel="noopener noreferrer">
-            <img src= https://raw.githubusercontent.com/JimohAR/it_core_project1/83f661b2beb7ad2be52c8fd47a2d9deab38e865f/data/github.svg alt="view source"/>
-        </a>
-    </center>"""
+"""<center> 
+    <a href="https://github.com/JimohAR/it_core_project1" target="_blank" rel="noopener noreferrer">
+        <img src= https://raw.githubusercontent.com/JimohAR/it_core_project1/83f661b2beb7ad2be52c8fd47a2d9deab38e865f/data/github.svg alt="view source"/>
+    </a>
+</center>"""
 st.markdown(link2, unsafe_allow_html=True)
