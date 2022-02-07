@@ -104,7 +104,7 @@ st.markdown(""" """)
 link = """[<center> <img src= https://raw.githubusercontent.com/JimohAR/it_core_project1/83f661b2beb7ad2be52c8fd47a2d9deab38e865f/data/github.svg alt="view source"/> </center>](https://github.com)"""
 link2 = \
 """<center> 
-    <a href="https://github.com/JimohAR/it_core_project1" target="_blank" rel="noopener noreferrer">
+    <a href="https://github.com/JimohAR/it_core_project1/tree/reformat_codebase" target="_blank" rel="noopener noreferrer">
         <img src= https://raw.githubusercontent.com/JimohAR/it_core_project1/83f661b2beb7ad2be52c8fd47a2d9deab38e865f/data/github.svg alt="view source"/>
     </a>
 </center>"""
